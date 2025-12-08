@@ -17,7 +17,7 @@ RESET   = "\033[0m"
 
 
 def main():
-    os.system("cls" if os.name == "nt" else "clear")
+    clear_screen()
 
     opening_cutscene()
 
@@ -29,6 +29,9 @@ def main():
 
 
 
+
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 
