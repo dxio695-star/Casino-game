@@ -21,6 +21,14 @@ def main():
 
     opening_cutscene()
 
+    
+
+
+
+
+
+
+
 
 
 
@@ -35,60 +43,27 @@ def clear_screen():
 
 
 
+def opening_cutscene():
 
-
-def opening_cutscene():  # This will be the final scene after simple animation when user run the game at the beginning.
-                         #                                                                  could add more decorations.
-
-
-# space we use to make animations. I guess we'll use a lot of time.sleep() function
+    title_art = """
 
 
 
 
-
-
-
-
-
-
-
-
+               ▓▓▓▓▓▓▓▓▓▓▓▓▓▓            ▒▒▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▒         ▒▒       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+               ▓▓                       ▒▒  ▒▒           ▒▒                          ▒▒             ▒▒ ▒▒       ▒▒       ▓▓          ▓▓
+               ▓▓                      ▒▒    ▒▒          ▒▒                          ▒▒             ▒▒  ▒▒      ▒▒       ▓▓          ▓▓
+               ▓▓                     ▒▒      ▒▒         ▒▒                          ▒▒             ▒▒   ▒▒     ▒▒       ▓▓          ▓▓
+               ▓▓                    ▒▒        ▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒              ▒▒             ▒▒    ▒▒    ▒▒       ▓▓          ▓▓
+               ▓▓                   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒                   ▒▒              ▒▒             ▒▒     ▒▒   ▒▒       ▓▓          ▓▓
+               ▓▓                  ▒▒            ▒▒                  ▒▒              ▒▒             ▒▒      ▒▒  ▒▒       ▓▓          ▓▓
+               ▓▓                  ▒▒            ▒▒                  ▒▒              ▒▒             ▒▒       ▒▒ ▒▒       ▓▓          ▓▓
+               ▓▓▓▓▓▓▓▓▓▓▓▓▓▓      ▒▒            ▒▒      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒         ▒▒▒       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-# final scene
-
-    print("""
-        
-        
-
-        
-                ▓▓▓▓▓▓▓▓▓▓▓▓▓▓            ▒▒▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▒        ▒▒       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-                ▓▓                       ▒▒  ▒▒           ▒▒                          ▒▒             ▒▒ ▒       ▒▒       ▓▓          ▓▓
-                ▓▓                      ▒▒    ▒▒          ▒▒                          ▒▒             ▒▒  ▒      ▒▒       ▓▓          ▓▓
-                ▓▓                     ▒▒      ▒▒         ▒▒                          ▒▒             ▒▒   ▒     ▒▒       ▓▓          ▓▓
-                ▓▓                    ▒▒        ▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒              ▒▒             ▒▒    ▒    ▒▒       ▓▓          ▓▓
-                ▓▓                   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒                   ▒▒              ▒▒             ▒▒     ▒   ▒▒       ▓▓          ▓▓
-                ▓▓                  ▒▒            ▒▒                  ▒▒              ▒▒             ▒▒      ▒  ▒▒       ▓▓          ▓▓
-                ▓▓                  ▒▒            ▒▒                  ▒▒              ▒▒             ▒▒       ▒ ▒▒       ▓▓          ▓▓
-                ▓▓▓▓▓▓▓▓▓▓▓▓▓▓      ▒▒            ▒▒      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒        ▒▒▒       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-        
-        
-
-
-        
 
 
                              ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓              ▒▒▒▒              ▒▒▒               ▒▒▒        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
@@ -100,12 +75,27 @@ def opening_cutscene():  # This will be the final scene after simple animation w
                                            ▓▓        ▒▒            ▒▒        ▒▒      ▒   ▒      ▒▒        ▓▓
                                            ▓▓        ▒▒            ▒▒        ▒▒       ▒ ▒       ▒▒        ▓▓
                              ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓        ▒▒            ▒▒        ▒▒        ▒        ▒▒        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-        
 
 
-        
 
-    """)
+
+
+"""
+
+    lst = title_art.split("\n")
+
+
+    total_line = 36
+    gap_line = 23
+    top_printed = 6
+    bottom_printed = -7
+
+    for i in range(9):
+        clear_screen()
+        print('\n'.join(lst[:top_printed + i]))
+        print("\n" * (gap_line - ((i + 1) * 2)))
+        print('\n'.join(lst[bottom_printed - i:]))
+        time.sleep(0.18)
 
 
 
