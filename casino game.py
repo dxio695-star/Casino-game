@@ -65,16 +65,23 @@ def main():
 
     clear_screen()
     while True:
-        games = {"slot machine": ("┌─────────────────┐",
+        games = {
+                 "slot machine": ("┌─────────────────┐",
                                   "│  7  │  7  │  7  │",
                                   "├─────────────────┤",
                                   "│       SPIN      │",
                                   "└─────────────────┘",
                                   "         │         ",
-                                  "         ○         "
-                                  )
+                                  "         ○         "),
+                                  
+                 "blackjack": ()
+                
+
+
 
         }
+
+
 
         pass
 
