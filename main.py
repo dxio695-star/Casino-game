@@ -187,7 +187,8 @@ def opening_gate(stdscr):
 
 
     
-
+def func():
+    pass
 
 
 
