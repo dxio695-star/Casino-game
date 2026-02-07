@@ -18,7 +18,7 @@ MACHINE = [
 
 
 
-symbols = ["C", "L", "W", "S", "B", "D", "7"]
+symbols = ["C", "L", "W", "D", "|", "7"]
 
 machine_height = 11
 machine_width = 43
@@ -52,7 +52,7 @@ def play_slot(stdscr):
         if ch == ord(' '):  # spin animation
 
             last_reel = [None, None, None]            
-            for i in range(22):
+            for i in range(20):
                 reels = []
                 for j in range(3):
                     new_sym = random.choice(symbols)
@@ -69,8 +69,7 @@ def play_slot(stdscr):
                 time.sleep(delay)
                 delay *= 1.1
 
-
-
+                curses.flushinp()
         stdscr.refresh()
     
 
