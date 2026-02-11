@@ -31,6 +31,22 @@ def play_slot(stdscr):
 
     # instructions
     stdscr.addstr(0, 0, "INSTRUCTION")
+    # cherry
+    stdscr.addstr(1, 0, "C", curses.color_pair(1))
+    stdscr.addstr(1, 1, " = Cherry 🍒")
+    # lemon
+    stdscr.addstr(2, 0, "L", curses.color_pair(2))
+    stdscr.addstr(2, 1, " = Lemon 🍋")
+    # watermelon
+    stdscr.addstr(3, 0, "W", curses.color_pair(3))
+    stdscr.addstr(3, 1, " = Watermelon 🍉")
+    #Diamond
+    stdscr.addstr(4, 0, "D", curses.color_pair(4))
+    stdscr.addstr(4, 1, " = Diamond 💎")
+    # BAR
+    stdscr.addstr(5, 0, "|", curses.color_pair(5))
+    stdscr.addstr(5, 1, " = BAR 🟫")
+    
 
     # enable colors
     curses.start_color()
