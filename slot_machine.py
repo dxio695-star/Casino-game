@@ -1,6 +1,17 @@
 import curses
 import time
 import random
+import os
+
+base_dir = os.path.dirname(os.path.abspath(__file__)) # get the base directory of the absolue path of current file slot_machine.py
+csv_abs_path = os.path.join(base_dir, "payout-rate.csv") # get the absolute path of the file payout-rate.csv
+
+# get payout data from payout-rate.csv
+with open(csv_abs_path, "r") as file:
+    data_list = file.readlines()
+
+def slot_main():
+    curses.wrapper(play_slot)
 
 
 MACHINE = [
@@ -29,25 +40,6 @@ machine_width = 43
 def play_slot(stdscr):
     curses.curs_set(0)
 
-    # instructions
-    stdscr.addstr(0, 0, "INSTRUCTION")
-    # cherry
-    stdscr.addstr(1, 0, "C", curses.color_pair(1))
-    stdscr.addstr(1, 1, " = Cherry 🍒")
-    # lemon
-    stdscr.addstr(2, 0, "L", curses.color_pair(2))
-    stdscr.addstr(2, 1, " = Lemon 🍋")
-    # watermelon
-    stdscr.addstr(3, 0, "W", curses.color_pair(3))
-    stdscr.addstr(3, 1, " = Watermelon 🍉")
-    #Diamond
-    stdscr.addstr(4, 0, "D", curses.color_pair(4))
-    stdscr.addstr(4, 1, " = Diamond 💎")
-    # BAR
-    stdscr.addstr(5, 0, "|", curses.color_pair(5))
-    stdscr.addstr(5, 1, " = BAR 🟫")
-    
-
     # enable colors
     curses.start_color()
     curses.use_default_colors()
@@ -69,8 +61,43 @@ def play_slot(stdscr):
     BAR_COLOR = curses.color_pair(5)
     JACKPOT_COLOR = curses.color_pair(6) | curses.A_BOLD  # bright 7
 
+
     symbols = ["C", "L", "W", "D", "|", "7"]
     symbol_attrs = [CHERRY_COLOR, LEMON_COLOR, WATERMELON_COLOR, DIAMOND_COLOR, BAR_COLOR, JACKPOT_COLOR]
+
+
+    # instructions
+    stdscr.addstr(0, 0, "INSTRUCTION")
+    # cherry
+    stdscr.addstr(1, 0, "C", curses.color_pair(1))
+    stdscr.addstr(1, 1, " = Cherry 🍒")
+    # lemon
+    stdscr.addstr(2, 0, "L", curses.color_pair(2))
+    stdscr.addstr(2, 1, " = Lemon 🍋")
+    # watermelon
+    stdscr.addstr(3, 0, "W", curses.color_pair(3))
+    stdscr.addstr(3, 1, " = Watermelon 🍉")
+    #Diamond
+    stdscr.addstr(4, 0, "D", curses.color_pair(4))
+    stdscr.addstr(4, 1, " = Diamond 💎")
+    # BAR
+    stdscr.addstr(5, 0, "|", curses.color_pair(5))
+    stdscr.addstr(5, 1, " = BAR 🟫")
+
+
+    '''
+    # PRIZE
+    for y in range(2, 22):
+        split_outcome = list(data_list[y][0])
+        # write outcomes first(after 777)
+        for ch in split_outcome:  # start with the third line and 77|, leave some space for the biggest prize 777
+            x = 60
+            stdscr.addstr(y, x, ch, symbol_attrs[symbols.index(ch)])
+            x += 1
+        stdscr.addstr(y, x, f" ---- {data_list[y]}* money")
+    '''
+
+
 
 
     # center machine#
@@ -118,7 +145,7 @@ def play_slot(stdscr):
         stdscr.refresh()
     
 
-curses.wrapper(play_slot)
+
 
 
 
@@ -140,20 +167,4 @@ def options():
 
 
 
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+slot_main()
