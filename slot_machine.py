@@ -8,13 +8,13 @@ csv_abs_path = os.path.join(base_dir, "payout-rate.csv") # get the absolute path
 
 # get payout data from payout-rate.csv
 with open(csv_abs_path, "r") as file:
-    data_list = file.readlines()
+    payout_data_list = file.readlines()
 
 def slot_main():
     curses.wrapper(play_slot)
 
 
-MACHINE = [
+MACHINE = (
     "╔═════════════════════════════════════════╗",
     "║      *******  SLOT MACHINE  *******     ║",
     "╠═════════════════════════════════════════╣",
@@ -26,8 +26,14 @@ MACHINE = [
     "║    │    SPIN    │     │    QUIT    │    ║",
     "║    └────────────┘     └────────────┘    ║",
     "╚═════════════════════════════════════════╝",
-]
+)
 
+
+show_all_button = (
+    "┌──────────┐",
+    "│ SHOW ALL │",
+    "└──────────┘",
+)
 
 
 # symbols = ["C", "L", "W", "D", "|", "7"]
@@ -52,6 +58,8 @@ def play_slot(stdscr):
     curses.init_pair(4, curses.COLOR_CYAN, -1)     # Diamond
     curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_WHITE)    # BAR
     curses.init_pair(6, curses.COLOR_RED, curses.COLOR_YELLOW)     # 7 Jackpot
+    curses.init_pair(7, curses.COLOR_BLACK, curses.COLOR_YELLOW)
+    curses.init_pair(8, -1, curses.COLOR_RED)
 
     # store attributes in variables
     CHERRY_COLOR = curses.color_pair(1)
@@ -60,13 +68,15 @@ def play_slot(stdscr):
     DIAMOND_COLOR = curses.color_pair(4)
     BAR_COLOR = curses.color_pair(5)
     JACKPOT_COLOR = curses.color_pair(6) | curses.A_BOLD  # bright 7
+    back_golden_color = curses.color_pair(7)
+    back_red_color = curses.color_pair(8)
 
 
     symbols = ["C", "L", "W", "D", "|", "7"]
     symbol_attrs = [CHERRY_COLOR, LEMON_COLOR, WATERMELON_COLOR, DIAMOND_COLOR, BAR_COLOR, JACKPOT_COLOR]
 
 
-    # instructions
+    # SHOW INSTRUCTIONS
     stdscr.addstr(0, 0, "INSTRUCTION")
     # cherry
     stdscr.addstr(1, 0, "C", curses.color_pair(1))
@@ -85,19 +95,40 @@ def play_slot(stdscr):
     stdscr.addstr(5, 1, " = BAR 🟫")
 
 
-    '''
-    # PRIZE
-    for y in range(2, 22):
-        split_outcome = list(data_list[y][0])
-        # write outcomes first(after 777)
-        for ch in split_outcome:  # start with the third line and 77|, leave some space for the biggest prize 777
-            x = 60
-            stdscr.addstr(y, x, ch, symbol_attrs[symbols.index(ch)])
-            x += 1
-        stdscr.addstr(y, x, f" ---- {data_list[y]}* money")
-    '''
+    # SHOW PAYOUT DATA
+    # write 777
+    stdscr.addstr(0, 122, " !!! ", back_red_color)
+    stdscr.addstr(0, 127, "777", JACKPOT_COLOR)
+    stdscr.addstr(0, 130, "  x500 COINS", back_golden_color)
+    stdscr.addstr(0, 142, " !!! ", back_red_color)
+    
+    # write from 77| to DDD
+    for y in range(2, 8):
+        payout_data_syms = payout_data_list[y].strip().split(",")[0]
+        x = 127
+        for ch in payout_data_syms:
+            if ch == "&":
+                stdscr.addstr(y, x, ch)
+                x += 1
+            else:
+                stdscr.addstr(y, x, ch, symbol_attrs[symbols.index(ch)])
+                x += 1
 
+            payout_data_muls = payout_data_list[y].strip().split(",")[2]
+            stdscr.addstr(y, x + 1, f"  x{payout_data_muls} COINS")
 
+    # button to show all and show less
+    show_all_button = (
+    "┌─────────────┐",
+    "│ SHOW ALL(s) │",
+    "└─────────────┘",
+    )
+
+    x = 127
+    i = 0
+    for y in range(9, 12):
+        stdscr.addstr(y, x, show_all_button[i])
+        i += 1
 
 
     # center machine#
@@ -143,6 +174,22 @@ def play_slot(stdscr):
 
                 curses.flushinp()
         stdscr.refresh()
+
+
+        if ch == ord('s'):
+            for y in range(2, 22):
+                payout_data_syms = payout_data_list[y].strip().split(",")[0]
+                x = 127
+                for ch in payout_data_syms:
+                    if ch == "&":
+                        stdscr.addstr(y, x, ch)
+                        x += 1
+                    else:
+                        stdscr.addstr(y, x, ch, symbol_attrs[symbols.index(ch)])
+                        x += 1
+
+                    payout_data_muls = payout_data_list[y].strip().split(",")[2]
+                    stdscr.addstr(y, x + 1, f"  x{payout_data_muls} COINS")
     
 
 
